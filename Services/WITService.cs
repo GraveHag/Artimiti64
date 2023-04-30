@@ -20,9 +20,9 @@ namespace Artimiti64
             {
                 using HttpResponseMessage response = await client.SendAsync(request(), token);
 
-                response.EnsureSuccessStatusCode();
-
                 string jsonResponse = await response.Content.ReadAsStringAsync();
+
+                response.EnsureSuccessStatusCode();
 
                 return jsonResponse;
 
@@ -34,15 +34,17 @@ namespace Artimiti64
             }
         }
 
-        public Task<string> SendRequest(string message)
+        public Task<string> SendRequest(string message, JsonObject contextMap, string sessionId)
         {
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage()
             {
-                Method = HttpMethod.Get,
+                Method = HttpMethod.Post,
                 RequestUri = queryBuilder
-                    .AppendSegment("message")
-                    .AppendQueryParam("q", message)
-                    .Build()
+                    .AppendSegment("event")
+                    .AppendQueryParam("session_id", sessionId)
+                    .AppendQueryParam("context_map", contextMap.ToJsonString())
+                    .Build(),
+                Content = new StringContent($"{{\"type\": \"message\", \"message\": \"{message}\"}}", Encoding.UTF8, "application/x-www-form-urlencoded"),
             };
 
             return Send(() => httpRequestMessage, CancellationToken.None);
