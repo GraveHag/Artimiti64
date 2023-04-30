@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Text;
+using System.Text.Json.Nodes;
 using Artimiti64Core;
 
 namespace Artimiti64
