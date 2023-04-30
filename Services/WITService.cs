@@ -1,27 +1,24 @@
-﻿using System.Net.Http.Headers;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Artimiti64Core;
 
 namespace Artimiti64
 {
     internal sealed class WITService : IWITService
     {
-        readonly HttpClient Client = new HttpClient();
+        readonly HttpClient client;
 
-        static readonly string APIEndpoint = "https://api.wit.ai";
+        QueryBuilder queryBuilder => new QueryBuilder(client.BaseAddress?.OriginalString);
 
-        internal async Task Authorize()
+        public WITService(HttpClient client)
         {
-            string accessKey = await ServiceCatalog.Mediate<IKeyStoreService>().GetKey() ?? throw new ArgumentNullException(nameof(accessKey));
-
-            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessKey);
-
+            this.client = client;
         }
 
         async Task<string> Send(Func<HttpRequestMessage> request, CancellationToken token = default)
         {
             try
             {
-                using HttpResponseMessage response = await Client.SendAsync(request(), token);
+                using HttpResponseMessage response = await client.SendAsync(request(), token);
 
                 response.EnsureSuccessStatusCode();
 
@@ -42,7 +39,7 @@ namespace Artimiti64
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage()
             {
                 Method = HttpMethod.Get,
-                RequestUri = new QueryBuilder(APIEndpoint)
+                RequestUri = queryBuilder
                     .AppendSegment("message")
                     .AppendQueryParam("q", message)
                     .Build()

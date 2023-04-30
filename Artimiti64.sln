@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artimiti64", "Artimiti64.csproj", "{1B82ABC1-E917-4118-9DF6-1DDE43D13D0A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artimiti64Core", "..\Artimiti64Core\Artimiti64Core.csproj", "{0FDCC603-CE46-46BE-8BA5-D2C9127B8783}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1B82ABC1-E917-4118-9DF6-1DDE43D13D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B82ABC1-E917-4118-9DF6-1DDE43D13D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B82ABC1-E917-4118-9DF6-1DDE43D13D0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FDCC603-CE46-46BE-8BA5-D2C9127B8783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FDCC603-CE46-46BE-8BA5-D2C9127B8783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FDCC603-CE46-46BE-8BA5-D2C9127B8783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FDCC603-CE46-46BE-8BA5-D2C9127B8783}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

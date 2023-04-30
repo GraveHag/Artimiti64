@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Artimiti64Core\Artimiti64Core.csproj" />
+  </ItemGroup>
+
 </Project>
