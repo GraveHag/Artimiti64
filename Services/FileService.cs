@@ -1,4 +1,6 @@
-﻿namespace Artimiti64
+﻿using Artimiti64.Services;
+
+namespace Artimiti64
 {
     public sealed class FileService : IFileService, IService
     {
@@ -51,10 +53,8 @@
 
             string jsonString = System.Text.Encoding.UTF8.GetString(buffer);
 
-            return Deserialize<T>(jsonString);
+            return Core.Deserialize<T>(jsonString);
         }
-
-        static T Deserialize<T>(string jsonString) => System.Text.Json.JsonSerializer.Deserialize<T>(jsonString, new System.Text.Json.JsonSerializerOptions() { Converters = { new TimeSpanConverter() } }) ?? throw new Exception("Cannot deserialize");
 
         static string Serialize(object obj) => System.Text.Json.JsonSerializer.Serialize(obj);
 

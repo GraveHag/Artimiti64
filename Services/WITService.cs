@@ -37,17 +37,5 @@ namespace Artimiti64
                 throw;
             }
         }
-
-
-        static T Deserialize<T>(string jsonString) => System.Text.Json.JsonSerializer.Deserialize<T>(jsonString) ?? throw new Exception("Cannot deserialize");
-
-        static string Deserialize(string jsonString, string key)
-        {
-            JsonObject? @object = System.Text.Json.JsonSerializer.Deserialize<JsonObject>(jsonString) ?? throw new Exception("Cannot deserialize");
-            if (!@object.TryGetPropertyValue(key, out JsonNode? node)) throw new ArgumentException("node key is missing");
-
-            return node!.GetValue<string>();
-        }
-
     }
 }
