@@ -36,7 +36,7 @@ namespace Artimiti64
             }
         }
 
-        public Task<string> SendRequest(string message, JsonObject contextMap, string sessionId)
+        async Task<string> IWITService.SendRequest(string message, JsonObject contextMap, string sessionId)
         {
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage()
             {
@@ -49,7 +49,21 @@ namespace Artimiti64
                 Content = new StringContent($"{{\"type\": \"message\", \"message\": \"{message}\"}}", Encoding.UTF8, "application/x-www-form-urlencoded"),
             };
 
-            return Send(() => httpRequestMessage, CancellationToken.None);
+            return await Send(() => httpRequestMessage, CancellationToken.None);
+        }
+
+        async Task<string> IWITService.SendRequest(string message)
+        {
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = queryBuilder
+                   .AppendSegment("message")
+                   .AppendQueryParam("q",message)
+                   .Build()
+            };
+
+            return await Send(() => httpRequestMessage, CancellationToken.None);
         }
     }
 }

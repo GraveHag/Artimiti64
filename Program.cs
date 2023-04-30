@@ -17,10 +17,8 @@ namespace Artimiti64
                 
             });
 
-
             IWITService witService = new WITService(client);
             string result = await witService.SendRequest("Your hair is beautiful.");
-            Console.WriteLine(result);
 
         }
     }
