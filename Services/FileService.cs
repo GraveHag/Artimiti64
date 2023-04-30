@@ -1,6 +1,4 @@
-﻿using Artimiti64.Services;
-
-namespace Artimiti64
+﻿namespace Artimiti64
 {
     public sealed class FileService : IFileService, IService
     {

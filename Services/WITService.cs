@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Headers;
 using System.Diagnostics;
-using System.Text.Json.Nodes;
 
 namespace Artimiti64
 {
@@ -36,6 +35,20 @@ namespace Artimiti64
                 Debugger.Log(3, string.Empty, ex.Message);
                 throw;
             }
+        }
+
+        public Task<string> SendRequest(string message)
+        {
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new QueryBuilder(APIEndpoint)
+                    .AppendSegment("message")
+                    .AppendQueryParam("q", message)
+                    .Build()
+            };
+
+            return Send(() => httpRequestMessage, CancellationToken.None);
         }
     }
 }

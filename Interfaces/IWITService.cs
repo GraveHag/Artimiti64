@@ -2,6 +2,6 @@
 {
     public interface IWITService
     {
-       
+        Task<string> SendRequest(string message);
     }
 }
