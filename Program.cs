@@ -1,4 +1,6 @@
-﻿namespace Artimiti64
+﻿using System.Text.Json.Nodes;
+
+namespace Artimiti64
 {
     internal class Program
     {
@@ -6,7 +8,11 @@
         {
             ServiceCatalog.RegisterAllService();
             IWITService witService = await ServiceCatalog.Mediate<IWITServiceFactory>().Create();
-            string result = await witService.SendRequest("Your hair is beautiful.");
+
+            JsonObject testJson = new JsonObject()
+            {
+            };
+            string result = await witService.SendRequest("Ugly shit",testJson, "proda5c");
             Console.WriteLine(result);
 
         }
